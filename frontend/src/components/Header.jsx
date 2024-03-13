@@ -87,11 +87,9 @@ export default function Header() {
                Login
               </button>
             </Link>
-            <Link>
             <span className="md:hidden" onClick={toggleMenu}>
                <BiMenu className="h-6 w-6 cursor-pointer" />
             </span>
-            </Link>
           </div>
         </div>
       </div>
