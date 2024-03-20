@@ -72,7 +72,7 @@ export default function Footer() {
             <div className="hidden lg:block">
               <img src={logo} alt="" />
             </div>
-            <div className="text-textColor font-[400] leading-5 lg:w-[500px] w-full text-center lg:text-start">
+            <div className="text-textColor font-[400] leading-5 lg:w-[350px] w-full text-center lg:text-start">
               CopyRight@ {date} developed by Le Huy Thanh
             </div>
             <ul className="flex gap-2 lg:gap-4">
@@ -86,7 +86,7 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-          <div className="flex justify-between order-1 lg:order-2 w-full">
+          <div className="flex flex-col gap-7 sm:gap-0 sm:flex-row justify-between order-1 lg:order-2 w-full">
             <div className="flex flex-col gap-3">
               <h2 className="text-black font-[700px] leading-5 text-[24px] mb-2">
                 Quick Links
@@ -104,7 +104,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-col gap-3">
               <h2 className="text-black font-[700px] leading-5 text-[24px] mb-2">
-                Quick Links
+                I want to:
               </h2>
               <ul className="flex gap-2 lg:gap-4 flex-col">
                 {socialMedia3.map((item, index) => (
@@ -119,7 +119,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-col gap-3">
               <h2 className="text-black font-[700px] leading-5 text-[24px] mb-2">
-                Quick Links
+               Support
               </h2>
               <ul className="flex gap-2 lg:gap-4 flex-col">
                 {socialMedia4.map((item, index) => (

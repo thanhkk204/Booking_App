@@ -10,6 +10,7 @@ import Service from "../pages/Service";
 import Contact from "../pages/Contact";
 import Doctors from "../pages/doctors/Doctors";
 import DoctorDetail from "../pages/doctors/DoctorDetail";
+import Login from "../pages/Login";
 export default createBrowserRouter([
     {
       path: "/",
@@ -40,6 +41,10 @@ export default createBrowserRouter([
         {
             path: 'doctors/:id',
             element: <DoctorDetail/>
+        },
+        {
+            path: 'login',
+            element: <Login/>
         },
       ]
     },
