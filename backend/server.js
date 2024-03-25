@@ -5,6 +5,7 @@ import 'dotenv/config'
 import mongoose from "mongoose"
 import authRouter from './routers/AuthRouter.js'
 import userRouter from './routers/UsersRouter.js'
+import doctorRouter from './routers/DoctorsRouter.js'
 const app = express()
 
 const port = process.env.PORT || 9999
@@ -16,6 +17,7 @@ app.use(cors())
 // Routers
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/user', userRouter)
+app.use('/api/v1/doctor', doctorRouter)
 
 // connect to database
 mongoose.set('strictQuery', false)

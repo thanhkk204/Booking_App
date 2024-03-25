@@ -1,5 +1,5 @@
 import User from "../modules/UserModule.js"
-import Doctor from "../modules/DotorModule.js"
+import Doctor from "../modules/DoctorModule.js"
 import jsonToken from "jsonwebtoken"
 import bcrypt from "bcryptjs"
 
@@ -75,7 +75,7 @@ export const login = async (req, res) => {
     // check user
 
     if (!user) {
-      return res.status(404).json({ message: "Account wasn't exist" })
+      return res.status(404).json({ message: "Account doesn't exist" })
     }
     // compare password
     const isRightPassword = await bcrypt.compare(req.body.password, user.password)
