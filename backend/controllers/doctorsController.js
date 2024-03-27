@@ -24,7 +24,7 @@ export const updateDoctor = async (req , res)=>{
 export const findSingleDoctor = async (req , res)=>{
     const id = req.params.id
     try {
-        const doctor = await DoctorModule.findById(id)
+        const doctor = await DoctorModule.findById(id).populate('reviews').select('-password')
 
         return res
         .status(200)

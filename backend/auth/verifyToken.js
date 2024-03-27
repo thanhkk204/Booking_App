@@ -40,7 +40,7 @@ export const restrict = roles => async(req, res, next)=>{
         user = patient
     }
     if (doctor) {
-        user = patient
+        user = doctor
     }
     if (!roles.includes(user.role)) {
         return res
