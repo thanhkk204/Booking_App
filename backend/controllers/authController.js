@@ -54,9 +54,10 @@ export const register = async (req, res) => {
       .status(200)
       .json({ success: true, message: "User successfuly created" })
   } catch (error) {
+    console.log(error);
     return res
       .status(501)
-      .json({ success: true, message: "Something was wrong on server" })
+      .json({ success: false, message: "Something was wrong on server" })
   }
 }
 export const login = async (req, res) => {
@@ -82,7 +83,7 @@ export const login = async (req, res) => {
     if (!isRightPassword) {
       return res
         .status(404)
-        .json({ success: false, message: "Password wasn't exist" })
+        .json({ success: false, message: "Password isn't right" })
     }
     // get jsonToken
     const token = generateToken(user)
@@ -92,7 +93,8 @@ export const login = async (req, res) => {
       success: true,
       message: "Successfully Login",
       token,
-      data: { ...rest, role },
+      data: { ...rest},
+      role
     })
   } catch (error) {
     console.log(error);

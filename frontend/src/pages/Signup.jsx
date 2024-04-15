@@ -1,10 +1,15 @@
 import React, { useState } from "react"
 import signUpImg from "../assets/images/signup.gif"
 import avatar from "../assets/images/doctor-img01.png"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import uploadCloudinary from '../utils/uploadCloudinary'
+import {BASE_URL} from '../config'
+import { toast } from "react-toastify"
+import {ClockLoader} from 'react-spinners'
 export default function Signup() {
   const [selectedFile, setSelectedFile] = useState(null)
-  const [previewURL, setPreviewURL] = useState("")
+  const [previewURL, setPreviewURL] = useState(null)
+  const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,17 +18,51 @@ export default function Signup() {
     gender: "",
     role: "patient",
   })
+  const navigate = useNavigate()
   const handleInput = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
-  const handleSubmitURL = (e)=>{
+  const handleFileInputChanges = async(e)=>{
     const file = e.target.files[0];
-    console.log(file);
+
+    const data = await uploadCloudinary(file)
+
+    console.log(data);
+
+    setPreviewURL(data.url)
+    setSelectedFile(data.url)
+    setFormData({...formData, photo: data.url})
   }
   const handleSubmitForm = async (e)=>{
     e.preventDefault()
+    setLoading(true)
+    try {
+      
+      const res = await fetch(`${BASE_URL}/auth/register`,{
+        method: "post",
+        headers:{
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+      const data = await res.json()
+      console.log(data);
+      const {message} = data
+
+      if (!res.ok) {
+         throw new Error(message)
+      }
+
+      toast.success(message)
+      setLoading(false)
+      navigate('/login')
+    } catch (error) {
+      console.log(error);
+      toast.success("Failed in sign up")
+      setLoading(false)
+      
+    }
   }
-console.log(formData);
   return (
     <section className="px-5 xl:px-0">
       <div className="max-w-[1170px] mx-auto">
@@ -103,6 +142,7 @@ console.log(formData);
                     name="gender"
                     value={formData.gender}
                   onChange={handleInput}
+                  required
                   >
                     <option value="">Select</option>
                     <option value="male">Male</option>
@@ -113,12 +153,14 @@ console.log(formData);
               </div>
 
               <div className="mb-5 flex items-center gap-3">
-                <figure
+                {selectedFile &&  <figure
                   className="w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor
-                 flex items-center justify-center"
+                 flex items-center justify-center overflow-hidden"
                 >
-                  <img src={avatar} alt="" className="w-full rounded-full" />
-                </figure>
+                  <img src={previewURL} alt="" className="w-full rounded-full" />
+                  
+                </figure>}
+               
 
                 <div className="relative w-[130px] h-[50px]">
                   <input
@@ -127,7 +169,7 @@ console.log(formData);
                     id="customFile"
                     accept=".jpg, .png"
                     className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
-                    onChange={handleSubmitURL}
+                    onChange={handleFileInputChanges}
                   />
                   <label
                     htmlFor="customFile"
@@ -142,10 +184,11 @@ console.log(formData);
 
               <div className="mt-7">
                 <button
+                disabled = {loading && true}
                   type="submit"
                   className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3"
                 >
-                  Sign Up
+                 {loading ? <ClockLoader size={35} color="#ffffff"/> : "Sign Up"}
                 </button>
               </div>
               <p className="mt-5 text-textColor text-center">
