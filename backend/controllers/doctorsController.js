@@ -1,3 +1,4 @@
+import BookingModule from "../modules/BookingModule.js";
 import DoctorModule from "../modules/DoctorModule.js";
 
 export const updateDoctor = async (req , res)=>{
@@ -97,3 +98,19 @@ export const deleteDoctor = async (req , res)=>{
         
     }
 }
+
+export const getDoctorProfile = async (req, res)=>{
+    const doctorId = req.userId
+
+    try {
+     const doctor = await DoctorModule.findById(doctorId)
+     if (!doctor) {
+       return res.status(401).json({success: false, message: "Doctor not found"})
+     }
+     const appointments = BookingModule.find({doctor: doctorId})
+     const {password, ...rest} = user._doc
+     res.status(201).json({success:true, message: "Successfully!", data: {...rest, appointments}})
+    } catch (error) {
+     res.status(501).json({message: "Something went wrong on server"})
+   }
+ }

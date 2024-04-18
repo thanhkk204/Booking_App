@@ -11,6 +11,9 @@ import Contact from "../pages/Contact";
 import Doctors from "../pages/doctors/Doctors";
 import DoctorDetail from "../pages/doctors/DoctorDetail";
 import Login from "../pages/Login";
+import DoctorProfile from "../profiles/doctor-acount/DoctorProfile";
+import MyAcount from "../profiles/user-acount/MyAcount";
+import ProtectedRouter from "./ProtectedRouter";
 export default createBrowserRouter([
     {
       path: "/",
@@ -25,6 +28,10 @@ export default createBrowserRouter([
         {
             path: 'signup',
             element: <Signup />
+        },
+        {
+            path: 'login',
+            element: <Login/>
         },
         {
             path: 'services',
@@ -43,9 +50,14 @@ export default createBrowserRouter([
             element: <DoctorDetail/>
         },
         {
-            path: 'login',
-            element: <Login/>
+            path: 'users/profile/me',
+            element: <ProtectedRouter allowedRoles={['patient']}><MyAcount/></ProtectedRouter>
         },
+        {
+            path: 'doctors/profile/me',
+            element: <ProtectedRouter allowedRoles={['doctor']}><DoctorProfile/></ProtectedRouter>
+        },
+        
       ]
     },
   ]);
