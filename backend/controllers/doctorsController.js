@@ -10,6 +10,7 @@ export const updateDoctor = async (req , res)=>{
         .status(200)
         .json({
             success: true,
+            message: "Successfully!",
             data: doctorUpdated
         })
     } catch (error) {
@@ -101,14 +102,13 @@ export const deleteDoctor = async (req , res)=>{
 
 export const getDoctorProfile = async (req, res)=>{
     const doctorId = req.userId
-
     try {
      const doctor = await DoctorModule.findById(doctorId)
      if (!doctor) {
        return res.status(401).json({success: false, message: "Doctor not found"})
      }
-     const appointments = BookingModule.find({doctor: doctorId})
-     const {password, ...rest} = user._doc
+     const appointments = await BookingModule.find({doctor: doctorId})
+     const {password, ...rest} = doctor._doc
      res.status(201).json({success:true, message: "Successfully!", data: {...rest, appointments}})
     } catch (error) {
      res.status(501).json({message: "Something went wrong on server"})

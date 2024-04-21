@@ -26,7 +26,6 @@ export default function Header() {
   const headerRef = useRef(null)
   const menuRef = useRef(null)
   const {user, token, role} = useContext(authContext)
-  console.log('header');
   const handleSticky = ()=>{
     window.addEventListener('scroll' , ()=>{
       if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
