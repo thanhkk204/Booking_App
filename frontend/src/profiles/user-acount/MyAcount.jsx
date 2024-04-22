@@ -3,14 +3,14 @@ import userImg from "../../assets/images/doctor-img01.png"
 import {authContext} from '../../context/AuthContextProvider'
 import MyBookings from "./MyBookings"
 import Profile from "./Profile"
-import userFetchData from "../../hooks/userFetchData"
+import useFetchData from "../../hooks/useFetchData"
 import { BASE_URL } from "../../config"
 import Loader from "../../components/Loader"
 import ErrorComponent from "../../components/ErrorComponent"
 export default function MyAcount() {
   const {dispatch} = useContext(authContext)
   const [tab, setTab] = useState('bookings')
-  const {data: userData, loading, error} = userFetchData(`${BASE_URL}/user/profile/me`)
+  const {data: userData, loading, error} = useFetchData(`${BASE_URL}/user/profile/me`)
   const handleLogOut = ()=>{
     dispatch({type: "LOGOUT"})
   }

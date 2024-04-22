@@ -1,16 +1,17 @@
 import React, { useState } from "react"
 import Loader from "../../components/Loader"
 import ErrorComponent from "../../components/ErrorComponent"
-import userFetchData from "../../hooks/userFetchData"
+import useFetchData from "../../hooks/useFetchData"
 import { BASE_URL } from "../../config"
 import Tabs from "./Tabs"
 import starIcon from "../../assets/images/Star.png"
 import DoctorAbout from '../../pages/doctors/DoctorAbout'
 import Profile from "./Profile"
+import Appointments from "./Appointments"
 
 export default function DoctorProfile() {
   const [tab, setTab] = useState("overview")
-  const { data, loading, error } = userFetchData(
+  const { data, loading, error } = useFetchData(
     `${BASE_URL}/doctor/profile/me`
   )
 
@@ -89,7 +90,7 @@ export default function DoctorProfile() {
                   />
                   </div>
                 )}
-                {tab === "appointments" && <div>appoinments</div>}
+                {tab === "appointments" && <Appointments appointments={data.appointments}/>}
                 {tab === "settings" && <Profile doctorData={data}/>}
               </div>
             </div>

@@ -1,12 +1,12 @@
 import React from 'react'
-import userFetchData from '../../hooks/userFetchData'
+import useFetchData from '../../hooks/useFetchData'
 import { BASE_URL } from '../../config'
 import DoctorCard from '../../components/doctors/DoctorCard'
 import Loader from '../../components/Loader'
 import ErrorComponent from '../../components/ErrorComponent'
 export default function MyBookings() {
 
-  const {data: appointments , loading , error} = userFetchData(`${BASE_URL}/user/appointment/my-appointment`)
+  const {data: appointments , loading , error} = useFetchData(`${BASE_URL}/user/appointment/my-appointment`)
   return (
     <div>
       {

@@ -62,7 +62,6 @@ export const register = async (req, res) => {
 }
 export const login = async (req, res) => {
   const { email } = req.body
-
   try {
     let user = null
     const patient = await User.findOne({ email })
@@ -79,6 +78,7 @@ export const login = async (req, res) => {
       return res.status(404).json({ message: "Account doesn't exist" })
     }
     // compare password
+    console.log(req.body.password)
     const isRightPassword = await bcrypt.compare(req.body.password, user.password)
     if (!isRightPassword) {
       return res

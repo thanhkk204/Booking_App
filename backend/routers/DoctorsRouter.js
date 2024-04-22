@@ -1,7 +1,10 @@
 import express from 'express'
 import { deleteDoctor, findAllDoctors, findSingleDoctor, getDoctorProfile, updateDoctor } from '../controllers/doctorsController.js'
+import reviewRouter from './ReviewsRouter.js'
 import { authenticate, restrict } from '../auth/verifyToken.js'
 const router = express.Router()
+
+router.use('/:doctorId/review', reviewRouter)
 
 router.get("/:id", findSingleDoctor)
 router.get("/", findAllDoctors)

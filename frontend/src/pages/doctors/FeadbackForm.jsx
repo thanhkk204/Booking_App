@@ -1,13 +1,46 @@
 import React, { useState } from "react"
 import { AiFillStar } from "react-icons/ai"
-
+import { useParams } from "react-router-dom"
+import { toast } from "react-toastify"
+import { BASE_URL, token } from "../../config"
+import { HashLoader } from "react-spinners"
 export default function FeadbackForm() {
   const [rating, setRating] = useState(0)
   const [hover, setHover] = useState(0)
   const [reviewText, setReviewText] = useState("")
+  const [loading, setLoading] = useState(false)
+  const { id } = useParams()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
+    console.log(token);
+
+    try {
+      if (!rating || !reviewText) {
+        setLoading(false)
+       return toast.error("Rating and Review filds are required")
+      }
+      console.log(`${BASE_URL}/doctor/${id}/review`);
+      const res = await fetch(`${BASE_URL}/doctor/${id}/review`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ rating, reviewText }),
+      })
+      const result = await res.json()
+      if (!res.ok) {
+        throw new Error(result.message)
+      }
+      setLoading(false)
+      toast.success("Successfully!")
+    } catch (error) {
+      setLoading(false)
+      console.log(error);
+      toast.error(error.message)
+    }
   }
   return (
     <form action="">
@@ -57,12 +90,13 @@ export default function FeadbackForm() {
           placeholder="Write your messages"
           onChange={(e) => setReviewText(e.target.value)}
         ></textarea>
-        <button 
-        className="btn" 
-        type="submit"
-        onClick={handleSubmit}
+        <button
+          disabled={loading && true}
+          className="btn"
+          type="submit"
+          onClick={handleSubmit}
         >
-          Submit Feadback
+          {loading ? <HashLoader size={35} /> : "Submit Feadback"}
         </button>
       </div>
     </form>

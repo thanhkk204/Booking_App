@@ -45,7 +45,7 @@ export default function Login() {
       setLoading(false)
       navigate('/')
     } catch (error) {
-      toast.success("Failed in sign up")
+      toast.error(error.message)
       setLoading(false)
       
     }

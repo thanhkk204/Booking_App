@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { token } from '../config'
 
-export default function userFetchData(url) {
+export default function useFetchData(url) {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const [data, setData] = useState([])

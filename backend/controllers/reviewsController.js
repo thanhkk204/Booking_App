@@ -8,7 +8,7 @@ export const getAllReviews = async (req, res) => {
 
         res
         .status(200)
-        .json({success: true, message: "Successfully"})
+        .json({success: true, message: "Get all Successfully"})
     } catch (error) {
         res
         .status(401)
@@ -17,6 +17,7 @@ export const getAllReviews = async (req, res) => {
 }
 // Create reviews
 export const createReview = async(req, res)=>{
+    console.log('create review')
     if(!req.body.doctor) req.body.doctor = req.params.doctorId
     if(!req.body.user) req.body.user = req.userId
     

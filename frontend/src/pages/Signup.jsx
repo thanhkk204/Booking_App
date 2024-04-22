@@ -58,7 +58,7 @@ export default function Signup() {
       navigate('/login')
     } catch (error) {
       console.log(error);
-      toast.success("Failed in sign up")
+      toast.success(error.message)
       setLoading(false)
       
     }
