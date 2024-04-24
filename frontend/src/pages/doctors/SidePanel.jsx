@@ -1,7 +1,34 @@
 import React from "react"
 import convertTime from "../../utils/convertTime"
+import { BASE_URL, token } from "../../config"
+import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom"
 
 export default function SidePanel({ doctorId, ticketPrice, timeSlots }) {
+
+  const handleBooking = async (e)=>{
+    e.preventDefault()
+    try {
+      
+      const res = await fetch(`${BASE_URL}/payment`,{
+        method: "POST",
+        headers:{
+          "content-type":"application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({price: 100000})
+      })
+      if (!res.ok) {
+        return toast.error("Can't impliment")
+      }
+      const result = await res.json()
+      window.location = result.data.payUrl
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+      
+    }
+  }
   return (
     <div className="shadow-panelShadow p-3 lg:p-5 rounded-md ">
       <div className="flex items-center justify-between">
@@ -33,7 +60,9 @@ export default function SidePanel({ doctorId, ticketPrice, timeSlots }) {
         </ul>
       </div>
 
-      <button className="btn px-2 w-full rounded-md">Book Appoitment</button>
+      <button
+      onClick={handleBooking}
+      className="btn px-2 w-full rounded-md">Book Appoitment</button>
     </div>
   )
 }

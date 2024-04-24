@@ -14,6 +14,7 @@ import Login from "../pages/Login";
 import DoctorProfile from "../profiles/doctor-acount/DoctorProfile";
 import MyAcount from "../profiles/user-acount/MyAcount";
 import ProtectedRouter from "./ProtectedRouter";
+import ThanksPage from "../pages/ThanksPage";
 export default createBrowserRouter([
     {
       path: "/",
@@ -32,6 +33,10 @@ export default createBrowserRouter([
         {
             path: 'login',
             element: <Login/>
+        },
+        {
+            path: 'thanks',
+            element: <ThanksPage/>
         },
         {
             path: 'services',

@@ -2,7 +2,6 @@ const convertTime = (time) => {
   const timeParts = time.split(":")
   let hours = parseInt(timeParts[0])
   let minutes = parseInt(timeParts[1])
-  console.log(hours)
   let meridiem = "am"
   if (hours >= 12) {
     meridiem = "pm"

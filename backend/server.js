@@ -7,6 +7,7 @@ import authRouter from './routers/AuthRouter.js'
 import userRouter from './routers/UsersRouter.js'
 import doctorRouter from './routers/DoctorsRouter.js'
 import reviewRouter from './routers/ReviewsRouter.js'
+import PaymentRouter from './routers/MoMoRouter.js'
 const app = express()
 
 const port = process.env.PORT || 9999
@@ -20,6 +21,7 @@ app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/doctor', doctorRouter)
 app.use('/api/v1/review', reviewRouter)
+app.use('/api/v1/payment', PaymentRouter)
 
 // connect to database
 mongoose.set('strictQuery', false)

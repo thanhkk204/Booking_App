@@ -60,7 +60,7 @@ export default function DoctorDetail() {
                     lg:leading-7 font-semibold text-headingColor
                    "
                     >
-                      <img src={startIcon} alt="" /> {averageRating.toFixed(1)}
+                      <img src={startIcon} alt="" /> {averageRating?.toFixed(1)}
                     </span>
                     <span className="text-[14px] leading-5 lg:text-[16px] lg:leading-7 font-[400] text-textColor">
                       ({reviews?.length})
