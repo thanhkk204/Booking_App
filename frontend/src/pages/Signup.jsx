@@ -27,7 +27,6 @@ export default function Signup() {
 
     const data = await uploadCloudinary(file)
 
-    console.log(data);
 
     setPreviewURL(data.url)
     setSelectedFile(data.url)
@@ -46,7 +45,6 @@ export default function Signup() {
         body: JSON.stringify(formData)
       })
       const data = await res.json()
-      console.log(data);
       const {message} = data
 
       if (!res.ok) {
@@ -57,7 +55,6 @@ export default function Signup() {
       setLoading(false)
       navigate('/login')
     } catch (error) {
-      console.log(error);
       toast.success(error.message)
       setLoading(false)
       

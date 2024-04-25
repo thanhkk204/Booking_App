@@ -14,7 +14,6 @@ export default function MyAcount() {
   const handleLogOut = ()=>{
     dispatch({type: "LOGOUT"})
   }
-  console.log('userData' , userData);
   return (
     <div className="max-w-[1170px] px-5 mx-auto">
       {

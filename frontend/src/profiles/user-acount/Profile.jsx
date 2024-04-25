@@ -32,9 +32,7 @@ export default function Profile({ userData }) {
   const handleFileInputChanges = async (e) => {
     const file = e.target.files[0]
 
-    const data = await uploadCloudinary(file)
-
-    console.log(data)
+    const data = await uploadCloudinary(file).log(data)
 
     setSelectedFile(data.url)
     setFormData({ ...formData, photo: data.url })
@@ -47,12 +45,11 @@ export default function Profile({ userData }) {
         method: "put",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(formData),
       })
       const data = await res.json()
-      console.log(data)
       const { message } = data
 
       if (!res.ok) {
@@ -63,7 +60,6 @@ export default function Profile({ userData }) {
       setLoading(false)
       navigate("/users/profile/me")
     } catch (error) {
-      console.log(error)
       toast.success("Failed in sign up")
       setLoading(false)
     }
@@ -92,8 +88,8 @@ export default function Profile({ userData }) {
             className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] 
               focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor
               placeholder:text-textColor rounded-md cursor-pointer"
-              aria-readonly
-              readOnly
+            aria-readonly
+            readOnly
             value={formData.email}
             onChange={handleInput}
           />

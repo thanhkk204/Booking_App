@@ -42,7 +42,7 @@ export default function Appointments({appointments}) {
                    }
                    </td>
                    <td className='px-6 py-4'>{item.ticketPrice}</td>
-                   <td className='px-6 py-4'>{formatDate(item.createAt)}</td>
+                   <td className='px-6 py-4'>{formatDate(item.createdAt)}</td>
                 </tr>
             ))}
         </tbody>

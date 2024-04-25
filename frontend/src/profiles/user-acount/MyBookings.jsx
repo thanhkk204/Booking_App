@@ -7,13 +7,15 @@ import ErrorComponent from '../../components/ErrorComponent'
 export default function MyBookings() {
 
   const {data: appointments , loading , error} = useFetchData(`${BASE_URL}/user/appointment/my-appointment`)
+
+  console.log(error);
   return (
     <div>
       {
         loading && !error && <Loader/>
       }
       {
-        error && !loading && <ErrorComponent errMessage={error}/>
+        error && !loading && <ErrorComponent errMessage={error.Error}/>
       }
       {
         !error && !loading && (

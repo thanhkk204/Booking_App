@@ -14,14 +14,12 @@ export default function FeadbackForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    console.log(token);
 
     try {
       if (!rating || !reviewText) {
         setLoading(false)
        return toast.error("Rating and Review filds are required")
       }
-      console.log(`${BASE_URL}/doctor/${id}/review`);
       const res = await fetch(`${BASE_URL}/doctor/${id}/review`, {
         method: "POST",
         headers: {
@@ -38,7 +36,6 @@ export default function FeadbackForm() {
       toast.success("Successfully!")
     } catch (error) {
       setLoading(false)
-      console.log(error);
       toast.error(error.message)
     }
   }

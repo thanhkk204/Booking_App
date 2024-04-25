@@ -63,11 +63,9 @@ export default function Profile({ doctorData }) {
       if (!res.ok) {
         throw new Error(result.message)
       }
-      console.log('thanh');
       toast.success(result.message)
       setLoading(false)
     } catch (error) {
-      console.log(error);
       setLoading(false)
       toast.error(error.message)
     }

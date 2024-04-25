@@ -91,13 +91,13 @@ export const getMyAppointment = async (req, res)=>{
         // get all user's booking
         const bookings = await BookingModule.find({user: req.userId})
         // filter to get doctorId
-        const doctorIds = bookings.map(el=>el.doctor.id)
+        const doctorIds = bookings.map(el=>el.doctor)
         // get doctor's information
         const doctors = await DoctorModule.find({_id: {$in: doctorIds}}).select('-password')
 
         res.status(201).json({success: true, message:"Appointments have been taken", data: doctors})
       } catch (error) {
-        
+        console.log(error)
         res.status(501).json({message: "Something went wrong on server"})
       }
 }

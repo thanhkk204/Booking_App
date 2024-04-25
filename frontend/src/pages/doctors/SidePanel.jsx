@@ -5,7 +5,6 @@ import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 
 export default function SidePanel({ doctorId, ticketPrice, timeSlots }) {
-
   const handleBooking = async (e)=>{
     e.preventDefault()
     try {
@@ -16,7 +15,7 @@ export default function SidePanel({ doctorId, ticketPrice, timeSlots }) {
           "content-type":"application/json",
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({price: 100000})
+        body: JSON.stringify({price: ticketPrice, doctorId: doctorId})
       })
       if (!res.ok) {
         return toast.error("Can't impliment")
@@ -24,7 +23,6 @@ export default function SidePanel({ doctorId, ticketPrice, timeSlots }) {
       const result = await res.json()
       window.location = result.data.payUrl
     } catch (error) {
-      console.log(error);
       toast.error(error.message)
       
     }
